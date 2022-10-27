@@ -6,7 +6,7 @@
   <link href="https://tobyhhw.github.io/atom.xml" rel="self"/>
   
   <link href="https://tobyhhw.github.io/"/>
-  <updated>2022-10-27T06:09:53.143Z</updated>
+  <updated>2022-10-27T13:50:14.927Z</updated>
   <id>https://tobyhhw.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>前端学习路线</title>
+    <link href="https://tobyhhw.github.io/posts/e5cf9037.html"/>
+    <id>https://tobyhhw.github.io/posts/e5cf9037.html</id>
+    <published>2022-10-27T11:43:34.000Z</published>
+    <updated>2022-10-27T13:50:14.927Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一年前的自己刚刚度过了高考难关，满心欢喜（bushi）的踏入了大学，<br>在师兄师姐的介绍下，懵懵懂懂的选择了前端这个方向，经过一年的摸索<br>也算是入了前端的门。下面就总结一下个人的前端学习路线</p><blockquote><p>这份学习路线并不完美，也不会有最终形态，正如前端不可预见、永无止境的未来。<br>仅供参考，此路线仅供零基础想入门的前端的同学，以及我的师弟师妹们有个参考。<br>等你入门了之后，对前端有个大概了解就知道以后深入需要学习什么了。</p></blockquote><hr><h2 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h2><p><strong>工欲善其事，必先利其器。</strong></p><p><strong>浏览器：</strong></p><ul><li>Chrome （极力推荐！！！）</li><li>Edge   （推荐学习）</li></ul><p><strong>编辑器：</strong></p><ul><li>VSCode （优先推荐这个！！）</li><li>WebStorm  （不喜欢他的风格）</li><li>HBuilder X （用来写uniapp和小程序的）</li><li>在线 IDE  （额。。。）</li><li><del>记事本</del></li></ul><p><strong>文档笔记</strong></p><ul><li>Markdown 语法</li><li>Typora</li></ul><hr><h2 id="前端入门基础知识"><a href="#前端入门基础知识" class="headerlink" title="前端入门基础知识"></a>前端入门基础知识</h2><p><strong>tip：建议从实战开始，边学边练，培养兴趣，快速入门。</strong></p><p><strong>前端三剑客：HTML  CSS  JavaScript</strong></p><blockquote><p>俗话说：基础不牢，地动山摇。基础的重要性不需要我多讲了吧。<br>HTML  CSS  JavaScript 作为前端最基础，同时我认为也是最重要的。<br>这一阶段的学习一定要慢而细，最重要的是一定要动手敲代码！动手敲代码！动手敲代码！<br>重要的事情说三次，不要只是跟着视频看而不去自己动手操作，很多东西你只有上手过后才能<br>有更深的理解，看十遍百遍不然自己动手敲一遍。</p></blockquote><h4 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h4><p><strong>HTML + CSS</strong></p><ul><li>小破站黑马pink老师： <a href="https://www.bilibili.com/video/BV14J4114768">https://www.bilibili.com/video/BV14J4114768</a></li></ul><p><strong>JavaScript</strong></p><ul><li>同样是小破站pink老师：<a href="https://www.bilibili.com/video/BV1Sy4y1C7ha/">https://www.bilibili.com/video/BV1Sy4y1C7ha</a></li><li>或者是李立超老师(js核心基础)：<a href="https://www.bilibili.com/video/BV1mG411h7aD">https://www.bilibili.com/video/BV1mG411h7aD</a></li></ul><hr><h2 id="进阶学习"><a href="#进阶学习" class="headerlink" title="进阶学习"></a>进阶学习</h2><blockquote><p>到了这里，恭喜你！你已经能用前端三剑客写一些静态的网页了。<br>下面我们继续学习！<br>当然如果你有更适合自己的学习方法，可自行学习。</p></blockquote><p><strong>交互和JS高级知识</strong></p><ul><li>AJAX：<a href="https://www.bilibili.com/video/BV1WC4y1b78y">https://www.bilibili.com/video/BV1WC4y1b78y</a></li><li>ES6: <a href="https://www.bilibili.com/video/BV1uK411H7on">https://www.bilibili.com/video/BV1uK411H7on</a></li><li>Promise: <a href="https://www.bilibili.com/video/BV1GA411x7z1">https://www.bilibili.com/video/BV1GA411x7z1</a></li><li>Axios: <a href="https://www.bilibili.com/video/BV1wr4y1K7tq"> https://www.bilibili.com/video/BV1wr4y1K7tq</a></li></ul><p><strong>团队协作 代码托管</strong></p><blockquote><p>集中存储、备份你的代码，还能和团队成员协作开发。</p></blockquote><ul><li>Git / Github: <a href="https://www.bilibili.com/video/BV1FE411P7B3">https://www.bilibili.com/video/BV1FE411P7B3</a></li><li>Gitee (不推荐使用，知道就好)</li><li>GitLab (目前不需要，知道有这么个东西就好)</li></ul><p><strong>Node Js</strong></p><blockquote><p>一个开源与跨平台的 JavaScript 运行时环境。它是一个可用于几乎任何项目的流行工具！</p></blockquote><ul><li>Node js: <a href="https://www.bilibili.com/video/BV1a34y167AZ">https://www.bilibili.com/video/BV1a34y167AZ</a></li></ul><p><strong>包管理</strong></p><blockquote><p>用于安装 Node.js 的扩展、工具等。</p></blockquote><ul><li>npm</li><li>yarn</li><li>npx</li></ul><p><strong>数据库</strong></p><ul><li>MySQL: <a href="https://www.bilibili.com/video/BV1Vy4y1z7EX">https://www.bilibili.com/video/BV1Vy4y1z7EX</a></li><li>MongoDB: <a href="https://www.bilibili.com/video/BV18s411E78K"> https://www.bilibili.com/video/BV18s411E78K</a></li></ul><hr><h2 id="前端框架和小程序"><a href="#前端框架和小程序" class="headerlink" title="前端框架和小程序"></a>前端框架和小程序</h2><blockquote><p>到了这里相信你的基础y已经比较扎实了，开始框架的学习。</p></blockquote><p><strong>优先学习Vue，然后是React，小程序后面根据自己需要学</strong></p><ul><li>Vue:<a href="https://www.bilibili.com/video/BV1Zy4y1K7SH"> https://www.bilibili.com/video/BV1Zy4y1K7SH</a></li><li>React:<a href="https://www.bilibili.com/video/BV1wy4y1D7JT"> https://www.bilibili.com/video/BV1wy4y1D7JT</a></li><li>TypeScript（建议学）:<a href="https://www.bilibili.com/video/BV1Xy4y1v7S2">https://www.bilibili.com/video/BV1Xy4y1v7S2</a></li><li>小程序：<a href="https://www.bilibili.com/video/BV1nE41117BQ">https://www.bilibili.com/video/BV1nE41117BQ</a></li></ul><hr><h2 id="后语"><a href="#后语" class="headerlink" title="后语"></a>后语</h2><blockquote><p>以上就是我大一到大二一年时间的学习路线，如果你是刚入门的小白，<br>不知道从哪里学起,可以参考我的学习路线,当然可能不适合所有人。<br>根据自己的需求学习。当然，我们前端的学习才刚刚开始，一入前端深似海，后面就要靠你们自己努力了。<br>一起加油把！！</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="前端篇" scheme="https://tobyhhw.github.io/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/"/>
+    
+    
+    <category term="前端" scheme="https://tobyhhw.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+    <category term="学习路线" scheme="https://tobyhhw.github.io/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/"/>
+    
+    <category term="技术" scheme="https://tobyhhw.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>9</title>
