@@ -6,7 +6,7 @@
   <link href="https://tobyhhw.github.io/atom.xml" rel="self"/>
   
   <link href="https://tobyhhw.github.io/"/>
-  <updated>2022-11-19T12:34:58.104Z</updated>
+  <updated>2022-11-19T13:37:07.189Z</updated>
   <id>https://tobyhhw.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>二次封装axios？有手就行</title>
+    <link href="https://tobyhhw.github.io/posts/15351b7e.html"/>
+    <id>https://tobyhhw.github.io/posts/15351b7e.html</id>
+    <published>2022-11-19T12:38:04.000Z</published>
+    <updated>2022-11-19T13:37:07.189Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote><p>Axios相信对前端熟悉的同学对它不会感到陌生了，这简直就是前端近年来的一大杀器，<br>官方推荐使用axios来进行网络请求，后面基本大部分项目都能瞧见它的身影。虽然axios很强，<br>但是单纯的axios并不能满足我们日常的使用,因此很多时候我们都需要对axios进行二次封装，<br>接下来我们就来详细讨论讨论。</p></blockquote><h1 id="为什么要二次封装axios"><a href="#为什么要二次封装axios" class="headerlink" title="为什么要二次封装axios"></a>为什么要二次封装axios</h1><blockquote><p>通常我们的项目会越做越大,页面也会越来越多,如果页面非常的少,直接用axios也没有什么大的影响,<br>那页面组件多了起来,上百个接口呢,这个时候后端改了接口,多加了一个参数什么的呢?那就只有找到那个页面,<br>进去修改.整个过程很繁琐不易于项目的维护和迭代.<br>这个时候如果我们统一的区管理接口,需要修改某一个接口的时候直接在api里修改对应的请求是不是很方便呢?<br>总结：api统一管理,不管接口有多少,所有的接口都可以非常清晰,容易维护.</p></blockquote><h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><pre class="line-numbers language-none"><code class="language-none">yarn create vite<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这里我们使用vite来初始化一个Vue项目</p><h2 id="下载axios"><a href="#下载axios" class="headerlink" title="下载axios"></a>下载axios</h2><pre class="line-numbers language-none"><code class="language-none">yarn add axios<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="独立管理api接口"><a href="#独立管理api接口" class="headerlink" title="独立管理api接口"></a>独立管理api接口</h2><p>以图灵官网的接口为例<br>我们在项目中创建 <code>api</code>文件夹用来管理所有的API，创建<code>axios.js</code> 文件二次封装axios.</p><pre class="line-numbers language-none"><code class="language-none">//axios.jsimport axios from "axios";function myAxios(axiosConfig) {    const service = axios.create({        baseURL: "https://www.turingteam.me:8081", // 设置统一的请求前缀        timeout: 10000 // 设置统一的超时时长    });    return service(axiosConfig);}export default myAxios<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>这里的<code>service(axiosConfig)</code>返回的是一个Promise对象</p><h2 id="编写不同功能的api"><a href="#编写不同功能的api" class="headerlink" title="编写不同功能的api"></a>编写不同功能的api</h2><p>如所有成员相关的API就放在 <code>member.js</code> 文件中，所有项目相关的API就放在 <code>project.js </code>中，<br>这样子就很有条理性。<br>下面我们来 <code>project.js</code> 中编写获取项目列表的API。</p><pre class="line-numbers language-none"><code class="language-none">//project.jsimport myAxios from "../axios";//团队项目查询export function queryProjectAPI(offset, page) {    return myAxios({        url: "/guest/project/queryProject",        method: 'get',        params: {            offset,            page        }    })}//通过id查询团队项目详细信息export function queryProjectByIdAPI(id) {    return myAxios({        url: "/guest/project/queryProjectById",        method: 'get',        params: {            id        }    })}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="在页面中具体使用"><a href="#在页面中具体使用" class="headerlink" title="在页面中具体使用"></a>在页面中具体使用</h2><p>在 App.vue 文件中随便加一个按钮，点击触发请求。</p><pre class="line-numbers language-none"><code class="language-none">&lt;template&gt;  &lt;button @click="getList"&gt;点击&lt;/button&gt;&lt;/template&gt;&lt;script lang='js'&gt;import {defineComponent} from 'vue'import {queryProjectAPI} from '@/api/project.js';export default defineComponent({  setup() {    const getList = async () =&gt; {     try{        let res = await queryProjectAPI(offset, page)        console.log(res);     }catch(error){        console.log(error);     }    }    return {      getList    }  }})&lt;/script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>到此，我们就封装了一个最简单的axios，我们每次新增加一个 API，只需要找到对应模块的 API 文件去添加即可，然后再到具体页面导入使用</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="前端篇" scheme="https://tobyhhw.github.io/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/"/>
+    
+    
+    <category term="前端" scheme="https://tobyhhw.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+    <category term="技术" scheme="https://tobyhhw.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="axios" scheme="https://tobyhhw.github.io/tags/axios/"/>
+    
+  </entry>
   
   <entry>
     <title>使用yarn的一些问题</title>
@@ -38,9 +66,9 @@
     
     <category term="前端" scheme="https://tobyhhw.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
-    <category term="技术" scheme="https://tobyhhw.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
-    
     <category term="yarn" scheme="https://tobyhhw.github.io/tags/yarn/"/>
+    
+    <category term="技术" scheme="https://tobyhhw.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
     
   </entry>
   
@@ -66,9 +94,9 @@
     
     <category term="前端" scheme="https://tobyhhw.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
-    <category term="学习路线" scheme="https://tobyhhw.github.io/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/"/>
-    
     <category term="技术" scheme="https://tobyhhw.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="学习路线" scheme="https://tobyhhw.github.io/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/"/>
     
   </entry>
   
