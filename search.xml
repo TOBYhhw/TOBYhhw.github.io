@@ -8,7 +8,7 @@
       <link href="posts/aadf0f9b.html"/>
       <url>posts/aadf0f9b.html</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="项目场景"><a href="#项目场景" class="headerlink" title="项目场景"></a>项目场景</h1><p>最近我在使用yarn的时候出现下面这种提示的频率越来越高了：<br>例如：info There appears to be trouble with your network connection. Retrying…</p><hr><h1 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h1><p>info There appears to be trouble with your network connection. Retrying…<br>信息:网络连接似乎出了点问题,请重试… 但我仔细检查下来,自己的网络似乎并没有什么问题,<br>网络一切正常,问题就很可能出现在了代理连接上。</p><hr><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>更换安装依赖的镜像,使用淘宝镜像安装,代码如下:</p><h2 id="1、安装好后更换淘宝镜像"><a href="#1、安装好后更换淘宝镜像" class="headerlink" title="1、安装好后更换淘宝镜像"></a>1、安装好后更换淘宝镜像</h2><p><code>yarn config set registry https://registry.npm.taobao.org</code></p><h2 id="2、移除原代理"><a href="#2、移除原代理" class="headerlink" title="2、移除原代理"></a>2、移除原代理</h2><p><code>yarn config delete proxy</code><br><code>npm config rm proxy</code><br><code>npm config rm https-proxy</code></p><h2 id="3、安装cnpm镜像并使用代理registry"><a href="#3、安装cnpm镜像并使用代理registry" class="headerlink" title="3、安装cnpm镜像并使用代理registry"></a>3、安装cnpm镜像并使用代理registry</h2><p><code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code><br><code>npm config set registry https://registry.npm.taobao.org</code></p><hr><p>这样问题就解决了</p>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="项目场景"><a href="#项目场景" class="headerlink" title="项目场景"></a>项目场景</h1><p>最近我在使用yarn的时候出现下面这种提示的频率越来越高了：<br>例如：info There appears to be trouble with your network connection. Retrying…</p><hr><h1 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h1><p>info There appears to be trouble with your network connection. Retrying…<br>信息:网络连接似乎出了点问题,请重试… 但我仔细检查下来,自己的网络似乎并没有什么问题,<br>网络一切正常,问题就很可能出现在了代理连接上。</p><hr><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>更换安装依赖的镜像,使用淘宝镜像安装,代码如下:</p><h2 id="1、安装好后更换淘宝镜像"><a href="#1、安装好后更换淘宝镜像" class="headerlink" title="1、安装好后更换淘宝镜像"></a>1、安装好后更换淘宝镜像</h2><pre class="line-numbers language-none"><code class="language-none">yarn config set registry https://registry.npm.taobao.org<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="2、移除原代理"><a href="#2、移除原代理" class="headerlink" title="2、移除原代理"></a>2、移除原代理</h2><pre class="line-numbers language-none"><code class="language-none">yarn config delete proxynpm config rm proxynpm config rm https-proxy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h2 id="3、安装cnpm镜像并使用代理registry"><a href="#3、安装cnpm镜像并使用代理registry" class="headerlink" title="3、安装cnpm镜像并使用代理registry"></a>3、安装cnpm镜像并使用代理registry</h2><pre class="line-numbers language-none"><code class="language-none">npm install -g cnpm --registry=https://registry.npm.taobao.orgnpm config set registry https://registry.npm.taobao.org<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><hr><p>这样问题就解决了</p>]]></content>
       
       
       <categories>
@@ -22,9 +22,9 @@
             
             <tag> 前端 </tag>
             
-            <tag> yarn </tag>
-            
             <tag> 技术 </tag>
+            
+            <tag> yarn </tag>
             
         </tags>
       
@@ -51,9 +51,9 @@
             
             <tag> 前端 </tag>
             
-            <tag> 技术 </tag>
-            
             <tag> 学习路线 </tag>
+            
+            <tag> 技术 </tag>
             
         </tags>
       
