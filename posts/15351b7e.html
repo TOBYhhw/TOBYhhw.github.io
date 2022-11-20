@@ -654,21 +654,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-19
+                    2022-11-20
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    713
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    5 分
                 </div>
                 
 
@@ -768,6 +768,64 @@ export default defineComponent({
 })
 &lt;/script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>到此，我们就封装了一个最简单的axios，我们每次新增加一个 API，只需要找到对应模块的 API 文件去添加即可，然后再到具体页面导入使用</p>
+<h2 id="POST请求参数序列化"><a href="#POST请求参数序列化" class="headerlink" title="POST请求参数序列化"></a>POST请求参数序列化</h2><p>在POST请求中的 <code>Content-Type</code> 常见的有以下3种形式：</p>
+<pre class="line-numbers language-none"><code class="language-none">Content-Type: application/json
+Content-Type: application/x-www-form-urlencoded
+Content-Type: multipart/form-data<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>现在主流基本在用application/json形式，Axios默认以这种形式工作，我们给后端接口传递参数也简单，直接丢在其data参数就行了。<br>我们在 <code>resume.js </code>文件中编写简历API</p>
+<pre class="line-numbers language-none"><code class="language-none">import myAxios from "../axios";
+
+
+//创新组内容填写
+export function resumeInnovateAddAPI(data) {
+    return myAxios({
+        url: "/guest/resume/resumeInnovateAdd",
+        method: 'post',
+        data: data,
+  });
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是有时候后端要求Content-Type必须以application/x-www-form-urlencoded形式，那么通过上面传递的参数，后端是收不到的，我们必须对参数数据进行所谓的序列化处理才行，让它以普通表单形式(键值对)发送到后端，而不是json形式</p>
+<pre class="line-numbers language-none"><code class="language-none">import myAxios from "../axios";
+
+//创新组内容填写
+export function resumeInnovateAddAPI(data) {
+    return myAxios({
+        url: "/guest/resume/resumeInnovateAdd",
+        method: 'post',
+        data: data,
+        headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    transformRequest: [
+      (data) =&gt; {
+        let result = ''
+        for (let key in data) {
+          result += encodeURIComponent(key) + '=' + encodeURIComponent(data[key]) + '&amp;'
+        }
+        return result.slice(0, result.length - 1)
+      }
+    ],
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我通过 headers 来指定Content-Type的形式，对于 transformRequest 就是允许在向服务器发送前，修改请求数据，但只能用在 ‘PUT’，’POST’ 和 ‘PATCH’ 这几个请求方法，且后面数组中的函数必须返回一个字符串，或 ArrayBuffer，或 Stream，更多的还有 transformResponse 能在传递给 then/catch 前，允许修改响应数据，其余更多参数的可以去 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/axios">Axios文档</a>查看。</p>
+<h2 id="请求拦截器-amp-响应拦截器"><a href="#请求拦截器-amp-响应拦截器" class="headerlink" title="请求拦截器&amp;响应拦截器"></a>请求拦截器&amp;响应拦截器</h2><h3 id="1-请求拦截器"><a href="#1-请求拦截器" class="headerlink" title="1 请求拦截器"></a>1 请求拦截器</h3><p>在请求发送前进行必要操作处理，例如添加统一cookie、请求体加验证、设置请求头等，相当于是对每个接口里相同操作的一个封装；</p>
+<pre class="line-numbers language-none"><code class="language-none">service.interceptors.request.use(function (config) {
+    // 在发送请求之前做些什么，例如加入token
+    .......
+    return config;
+  }, function (error) {
+    // 对请求错误做些什么
+    return Promise.reject(error);
+  });<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-响应拦截器"><a href="#2-响应拦截器" class="headerlink" title="2 响应拦截器"></a>2 响应拦截器</h3><p>同理，响应拦截器也是如此功能，只是在请求得到响应之后，对响应体的一些处理，通常是数据统一处理等，也常来判断登录失效等。</p>
+<pre class="line-numbers language-none"><code class="language-none">service.interceptors.response.use(function (response) {
+    // 在接收响应做些什么
+    ......
+    return response;
+  }, function (error) {
+    // 对响应错误做点什么
+    return Promise.reject(error);
+  });<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
@@ -1657,7 +1715,7 @@ new Valine({
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">1.9k</span>&nbsp;字
+                class="white-color">2.5k</span>&nbsp;字
             
             
             
